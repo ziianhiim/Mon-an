@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dịch vụ nấu ăn Triệu Nguyễn</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e6f7f1;
+    }
+
+    .header, .footer {
+      background-color: #d0f0e0;
+      text-align: center;
+      padding: 20px 10px;
+      color: #006666;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .header .info, .footer {
+      font-size: 16px;
+    }
+
+    .section {
+      padding: 16px;
+      border-bottom: 2px solid #b3e6d6;
+    }
+
+    .section h2 {
+      text-align: center;
+      color: #009999;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    .dish-list {
+      padding-left: 20px;
+    }
+
+    .dish-list li {
+      margin-bottom: 6px;
+      padding: 6px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .dish-list li.selected {
+      background-color: #a0eac5;
+      font-weight: bold;
+    }
+
+    .selected-count {
+      position: fixed;
+      bottom: 120px;
+      right: 20px;
+      background: #00b38f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    .result-box {
+      display: none;
+      position: fixed;
+      bottom: 280px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #7cd6b2;
+      padding: 20px;
+      max-width: 300px;
+      top: 50px;
+      bottom: auto;
+      z-index: 999;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .copy-button {
+      display: block;
+      margin: 10px auto;
+      background: #00a67c;
+      color: white;
+      padding: 6px 12px;
+      margin-top: 10px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    .copy-text {
+      font-size: 15px;
+      margin-top: 10px;
+      color: #006666;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 998;
+    }
+
+    .copy-info {
+      font-size: 15px;
+      color: #006666;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Dịch vụ nấu ăn <span style="color: red; font-weight: bold;">Triệu Nguyễn</span></h1>
+    <div class="info">
+      0927 754 416 - 0944 854 837<br>
+      Ấp 4, Xã Quê Mỹ Thạnh, Tân Trụ, Long An
+    </div>
+  </div>
+
+  <!-- PHẦN MÓN ĂN -->
+  
+  <div class="section">
+  <h2>Món Khai Vị:</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Gỏi củ hủ dừa</li>
+      <li onclick="toggleSelection(this)">Chả cá thác lác chiên</li>
+      <li onclick="toggleSelection(this)">Bò lá lốt</li>
+      <li onclick="toggleSelection(this)">Chả giò tôm</li>
+      <li onclick="toggleSelection(this)">Chả giò rế tôm</li>
+      <li onclick="toggleSelection(this)">Hoành thánh chiên</li>
+      <li onclick="toggleSelection(this)">Cá thác lác chiên thì là</li>
+      <li onclick="toggleSelection(this)">Chạo tôm</li>
+<li onclick="toggleSelection(this)">Chả đùm - Bánh phồng</li>
+      <li onclick="toggleSelection(this)">Nem nướng</li>
+      <li onclick="toggleSelection(this)">Gỏi sứa</li>
+      <li onclick="toggleSelection(this)">Gỏi ngó sen</li>
+      <li onclick="toggleSelection(this)">Gỏi bồn bồn</li>
+      <li onclick="toggleSelection(this)">Gỏi bò bóp thấu</li>
+      <li onclick="toggleSelection(this)">Thịt nguội bát bửu</li>
+      <li onclick="toggleSelection(this)">Chả giò hải sản</li>
+      <li onclick="toggleSelection(this)">Chả cua</li>
+      <li onclick="toggleSelection(this)">Chả giò sốt mayonnaise</li>
+      <li onclick="toggleSelection(this)">Chả giò chiên xù</li>
+      <li onclick="toggleSelection(this)">Ốc nhồi thịt</li>
+      <li onclick="toggleSelection(this)">Khai vị 2 món: Chả giò + Chả cá thác lác</li>
+      <li onclick="toggleSelection(this)">Khai vị 3 món: Gỏi + Mực + Chả giò</li>
+      <li onclick="toggleSelection(this)">Combo 2 món</li>
+      <li onclick="toggleSelection(this)">Combo 3 món</li>
+      <li onclick="toggleSelection(this)">Combo 4 món</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Gỏi:</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Gỏi củ hũ dừa tôm thịt</li>
+      <li onclick="toggleSelection(this)">Gỏi đu đủ sứa</li>
+      <li onclick="toggleSelection(this)">Gỏi xoài tôm thịt</li>
+      <li onclick="toggleSelection(this)">Gỏi ngó sen tôm thịt</li>
+      <li onclick="toggleSelection(this)">Gỏi cà pháo thịt bò</li>
+      <li onclick="toggleSelection(this)">Gỏi đu đủ khô bò</li>
+      <li onclick="toggleSelection(this)">Gỏi bồn bồn tôm thịt</li>
+      <li onclick="toggleSelection(this)">Gỏi hải sản Thái Lan</li>
+      <li onclick="toggleSelection(this)">Gỏi mực hải sản</li>
+      <li onclick="toggleSelection(this)">Gỏi gà hoa chuối</li>
+      <li onclick="toggleSelection(this)">Gỏi bò bóp thấu</li>
+      <li onclick="toggleSelection(this)">Bắp bò trộn dầu giấm</li>
+      <li onclick="toggleSelection(this)">Gỏi tai heo tôm</li>
+      <li onclick="toggleSelection(this)">Gỏi tiến vua tôm mực</li>
+      <li onclick="toggleSelection(this)">Gỏi bao tử + Lưỡi heo</li>
+      <li onclick="toggleSelection(this)">Gỏi cải mầm thịt bò</li>
+      <li onclick="toggleSelection(this)">Gỏi gà xé phay</li>
+      <li onclick="toggleSelection(this)">Gỏi rau muống tôm thịt</li>
+      <li onclick="toggleSelection(this)">Gỏi bò trộn rau muống</li>
+      <li onclick="toggleSelection(this)">Gỏi bò rau càng cua</li>
+      <li onclick="toggleSelection(this)">Gỏi gà trộn càng cua</li>
+      <li onclick="toggleSelection(this)">Gỏi đu đủ tai heo</li>
+      <li onclick="toggleSelection(this)">Gỏi vịt</li>
+      <li onclick="toggleSelection(this)">Gỏi mực hoa chuối tôm</li>
+      <li onclick="toggleSelection(this)">Gỏi gân bò</li>
+      <li onclick="toggleSelection(this)">Gỏi xoài khô mực</li>
+      <li onclick="toggleSelection(this)">Gỏi nai bóp thấu</li>
+      <li onclick="toggleSelection(this)">Dê tái chanh</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Bò - Nai - Dê</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Bò bóp thấu</li>
+      <li onclick="toggleSelection(this)">Bò nấu pate</li>
+      <li onclick="toggleSelection(this)">Bò nấu tiêu xanh</li>
+      <li onclick="toggleSelection(this)">Bò nấu đậu</li>
+      <li onclick="toggleSelection(this)">Bò nấu rượu vang</li>
+      <li onclick="toggleSelection(this)">Bắp bò hấp cuốn rau rừng</li>
+      <li onclick="toggleSelection(this)">Bò nhúng giấm</li>
+      <li onclick="toggleSelection(this)">Bò né</li>
+      <li onclick="toggleSelection(this)">Bò nấu la ru</li>
+      <li onclick="toggleSelection(this)">Bò nấu sữa</li>
+      <li onclick="toggleSelection(this)">Bò lúc lắc khoai tây chiên</li>
+      <li onclick="toggleSelection(this)">Bò nấu sữa dừa hạt điều</li>
+      <li onclick="toggleSelection(this)">Bò nấu đốp</li>
+      <li onclick="toggleSelection(this)">Gân bò xào thập cẩm</li>
+      <li onclick="toggleSelection(this)">Bò nướng bánh hỏi</li>
+      <li onclick="toggleSelection(this)">Nai né</li>
+      <li onclick="toggleSelection(this)">Bê xào lăn</li>
+      <li onclick="toggleSelection(this)">Bê nấu tiêu xanh</li>
+      <li onclick="toggleSelection(this)">Bê nấu pate</li>
+      <li onclick="toggleSelection(this)">Bê hấp</li>
+      <li onclick="toggleSelection(this)">Bê hấp cuốn rau rừng</li>
+      <li onclick="toggleSelection(this)">Bê tái chanh</li>
+      <li onclick="toggleSelection(this)">Lươn xào lăn</li>
+      <li onclick="toggleSelection(this)">Dê xào lăn</li>
+      <li onclick="toggleSelection(this)">Dê nấu cà ri + bánh mì</li>
+      <li onclick="toggleSelection(this)">Sườn dê nướng</li>
+      <li onclick="toggleSelection(this)">Dê né</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Gà - Vịt</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Gà hấp lá chanh</li>
+      <li onclick="toggleSelection(this)">Gà chiên nước mắm + bánh bao (xôi)</li>
+      <li onclick="toggleSelection(this)">Gà hấp mắm nhĩ</li>
+      <li onclick="toggleSelection(this)">Gà xé phay</li>
+      <li onclick="toggleSelection(this)">Gà nướng</li>
+      <li onclick="toggleSelection(this)">Gà bóp thấu</li>
+      <li onclick="toggleSelection(this)">Gà chiên xù</li>
+      <li onclick="toggleSelection(this)">Gà nấu chao</li>
+      <li onclick="toggleSelection(this)">Gà nướng muối ớt</li>
+      <li onclick="toggleSelection(this)">Gà xào lăn</li>
+      <li onclick="toggleSelection(this)">Gà tiềm ớt hiểm</li>
+      <li onclick="toggleSelection(this)">Gà nấu sả ớt</li>
+      <li onclick="toggleSelection(this)">Gà xào rau rừng</li>
+      <li onclick="toggleSelection(this)">Gà quay</li>
+      <li onclick="toggleSelection(this)">Gà tiềm thuốc bắc</li>
+     <li onclick="toggleSelection(this)">Vịt quay tiêu xanh</li>
+      <li onclick="toggleSelection(this)">Vịt chiên giòn</li>
+      <li onclick="toggleSelection(this)">Vịt xối mỡ bánh bao</li>
+      <li onclick="toggleSelection(this)">Vịt nấu chao</li>
+      <li onclick="toggleSelection(this)">Vịt nấu tiêu xanh</li>
+      <li onclick="toggleSelection(this)">Vịt nấu cà ri</li>
+      <li onclick="toggleSelection(this)">Vịt nướng</li>
+      <li onclick="toggleSelection(this)">Vịt tiềm ngũ quả</li>
+      <li onclick="toggleSelection(this)">Vịt tiềm la hán</li>
+      <li onclick="toggleSelection(this)">Bồ câu quay</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Tôm - Mực - Cua</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Tôm hoàng kim</li>
+      <li onclick="toggleSelection(this)">Tôm cháy tỏi</li>
+      <li onclick="toggleSelection(this)">Tôm rim me</li>
+      <li onclick="toggleSelection(this)">Tôm sú sốt xí muội</li>
+      <li onclick="toggleSelection(this)">Tôm sốt chanh dây</li>
+      <li onclick="toggleSelection(this)">Tôm hấp chanh dây</li>
+      <li onclick="toggleSelection(this)">Mực hấp gừng</li>
+      <li onclick="toggleSelection(this)">Mực chua ngọt</li>
+      <li onclick="toggleSelection(this)">Mực né rau củ</li>
+      <li onclick="toggleSelection(this)">Mực xào sa tế</li>
+      <li onclick="toggleSelection(this)">Mực chiên giòn</li>
+      <li onclick="toggleSelection(this)">Mực chiên xù</li>
+      <li onclick="toggleSelection(this)">Mực nhồi thịt</li>
+      <li onclick="toggleSelection(this)">Mực hấp nước dừa</li>
+      <li onclick="toggleSelection(this)">Mực chiên nước mắm</li>
+      <li onclick="toggleSelection(this)">Mực nướng</li>
+      <li onclick="toggleSelection(this)">Mực chiên bơ tỏi</li>
+      <li onclick="toggleSelection(this)">Mực xào thập cẩm</li>
+      <li onclick="toggleSelection(this)">Bạch tuộc nướng</li>
+      <li onclick="toggleSelection(this)">Cua hấp Pepsi</li>
+      <li onclick="toggleSelection(this)">Cua nấu cà ri</li>
+      <li onclick="toggleSelection(this)">Càng cua bách hoa</li>
+      <li onclick="toggleSelection(this)">Cua lột lăn bột xù</li>
+      <li onclick="toggleSelection(this)">Cua lột chiên trứng muối</li>
+      <li onclick="toggleSelection(this)">Cua rang me</li>
+      <li onclick="toggleSelection(this)">Cua hấp bia</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Cá:</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Cá chẽm hấp HongKong</li>
+      <li onclick="toggleSelection(this)">Cá chẽm sốt chua ngọt</li>
+      <li onclick="toggleSelection(this)">Cá chẽm chưng tương</li>
+      <li onclick="toggleSelection(this)">Cá chẽm đông cô</li>
+      <li onclick="toggleSelection(this)">Cá chẽm chiên xù</li>
+      <li onclick="toggleSelection(this)">Phi lê cá chiên giòn</li>
+      <li onclick="toggleSelection(this)">Cá basa nướng giấy bạc</li>
+      <li onclick="toggleSelection(this)">Cá diêu hồng sốt tương hột</li>
+      <li onclick="toggleSelection(this)">Cá diêu hồng hấp HongKong</li>
+      <li onclick="toggleSelection(this)">Cá tai tượng chiên xù</li>
+      <li onclick="toggleSelection(this)">Cá tai tượng sốt chua ngọt</li>
+      <li onclick="toggleSelection(this)">Cá lóc hấp bầu</li>
+      <li onclick="toggleSelection(this)">Cá lóc sốt chua ngọt</li>
+      <li onclick="toggleSelection(this)">Cá lóc quay bánh hỏi</li>
+      <li onclick="toggleSelection(this)">Cá lóc chiên xù mắm nêm</li>
+      <li onclick="toggleSelection(this)">Cá lóc lăn bột sốt</li>
+      <li onclick="toggleSelection(this)">Đầu cá hồi chiên nước mắm</li>
+      <li onclick="toggleSelection(this)">Cá tầm nướng muối ớt</li>
+      <li onclick="toggleSelection(this)">Cá mú hấp HongKong</li>
+      <li onclick="toggleSelection(this)">Cá mú sốt cam</li>
+      <li onclick="toggleSelection(this)">Cá mú sốt chua ngọt</li>
+      <li onclick="toggleSelection(this)">Cá mú sốt xí muội</li>
+      <li onclick="toggleSelection(this)">Cá mú sốt me</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+<div class="section">
+    <h2>Món Heo</h2>
+    <div class="dish-list">
+      <ul>
+        <li onclick="toggleSelection(this)">Bao tử, lưỡi nấu tiêu</li>
+        <li onclick="toggleSelection(this)">Giò heo chiên giòn</li>
+        <li onclick="toggleSelection(this)">Heo sữa quay</li>
+      </ul>
+    </div>
+  </div>
+  <h2> Món Súp - Cháo</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Súp bào ngư</li>
+      <li onclick="toggleSelection(this)">Súp hoành thánh</li>
+      <li onclick="toggleSelection(this)">Súp tóc tiên cua</li>
+      <li onclick="toggleSelection(this)">Súp óc heo cua</li>
+      <li onclick="toggleSelection(this)">Súp hải sản</li>
+      <li onclick="toggleSelection(this)">Súp ngọc bích</li>
+ <li onclick="toggleSelection(this)">Súp hải sản</li>
+        <li onclick="toggleSelection(this)">Cháo hải sản</li>
+        <li onclick="toggleSelection(this)">Cháo gà ri</li>
+        <li onclick="toggleSelection(this)">Cháo cá lóc</li>
+        <li onclick="toggleSelection(this)">Cơm chiên hải sản</li>
+        <li onclick="toggleSelection(this)">Cơm chiên dương châu</li>
+        <li onclick="toggleSelection(this)">Cơm chiên cá mặn</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Món Lẩu:</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Lẩu thái hải sản</li>
+      <li onclick="toggleSelection(this)">Lẩu riêu cua hải sản</li>
+      <li onclick="toggleSelection(this)">Lẩu nấm hải sản</li>
+      <li onclick="toggleSelection(this)">Lẩu cá kèo lá giang</li>
+      <li onclick="toggleSelection(this)">Lẩu cá lăng</li>
+      <li onclick="toggleSelection(this)">Lẩu cá tầm</li>
+      <li onclick="toggleSelection(this)">Lẩu đầu cá hồi</li>
+      <li onclick="toggleSelection(this)">Lẩu gà lá é</li>
+      <li onclick="toggleSelection(this)">Lẩu gà tiềm ớt hiểm</li>
+      <li onclick="toggleSelection(this)">Lẩu gà nấu nấm</li>
+      <li onclick="toggleSelection(this)">Lẩu gà măng chua</li>
+      <li onclick="toggleSelection(this)">Lẩu gà lá giang</li>
+      <li onclick="toggleSelection(this)">Lẩu vịt măng chua</li>
+      <li onclick="toggleSelection(this)">Lẩu vịt nấu chao</li>
+      <li onclick="toggleSelection(this)">Lẩu bò nhúng giấm</li>
+      <li onclick="toggleSelection(this)">Lẩu đuôi bò hầm tiêu</li>
+      <li onclick="toggleSelection(this)">Lẩu hải sản chua cay</li>
+      <li onclick="toggleSelection(this)">Lẩu thập cẩm</li>
+      <li onclick="toggleSelection(this)">Lẩu nấm chay</li>
+      <li onclick="toggleSelection(this)">Lẩu riêu cua bắp bò</li>
+    </ul>
+  </div>
+</div>
+<div class="section">
+  <h2>Tráng miệng</h2>
+  <div class="dish-list">
+    <ul>
+      <li onclick="toggleSelection(this)">Rau câu sữa sầu riêng</li>
+      <li onclick="toggleSelection(this)">Sữa chua trái cây</li>
+      <li onclick="toggleSelection(this)">Nho mỹ</li>
+      <li onclick="toggleSelection(this)">Trái cây theo mùa</li>
+    </ul>
+  </div>
+</div>
+
+  <!-- Nút hiển thị số món đã chọn -->
+  <button class="selected-count" onclick="toggleResultBox()">0 Món Đã Chọn</button>
+
+  <div class="overlay" onclick="closeResultBox()"></div>
+
+  <!-- Hộp kết quả món đã chọn -->
+  <div class="result-box" id="resultBox">
+    <div style="text-align: right;">
+      <button onclick="closeResultBox()" style="background: none; border: none; font-size: 20px; cursor: pointer;">×</button>
+    </div>
+    <h2 style="text-align: center;">Món Bạn Đã Chọn:</h2>
+    <ul id="selectedDishes"></ul>
+    <button class="copy-button" onclick="copyToClipboard()">Sao Chép</button>
+    <div class="copy-info">Sao chép và gửi danh sách món qua Zalo/Facebook để được báo giá nhé!</div>
+  </div>
+
+  <div class="footer">
+    Kết nối với chúng tôi qua <b>Zalo</b> hoặc <b>Facebook</b>: <br>
+    <a href="https://zalo.me/0927754416" target="_blank">Zalo Triệu Nguyễn</a> |   
+    <a href="https://facebook.com/your-page" target="_blank">Facebook Triệu Nguyễn</a> |   
+    <a href="https://zalo.me/0944854837" target="_blank">Zalo Ly Nguyễn</a>
+  </div>
+
+  <script>
+    let selectedDishes = [];
+
+    function toggleSelection(dish) {
+      const dishName = dish.innerText.trim();
+      dish.classList.toggle('selected');
+
+      if (dish.classList.contains('selected')) {
+        selectedDishes.push(dishName);
+      } else {
+        selectedDishes = selectedDishes.filter(item => item !== dishName);
+      }
+
+      document.querySelector('.selected-count').innerText = `${selectedDishes.length} Món Đã Chọn`;
+    }
+
+    function toggleResultBox() {
+      const resultBox = document.getElementById('resultBox');
+      const overlay = document.querySelector('.overlay');
+      const selectedCountBtn = document.querySelector('.selected-count');
+      const isVisible = resultBox.style.display === 'block';
+
+      resultBox.style.display = isVisible ? 'none' : 'block';
+      overlay.style.display = isVisible ? 'none' : 'block';
+      selectedCountBtn.style.display = isVisible ? 'block' : 'none';
+
+      if (!isVisible) {
+        updateSelectedDishes();
+      }
+    }
+
+    function closeResultBox() {
+      document.getElementById('resultBox').style.display = 'none';
+      document.querySelector('.overlay').style.display = 'none';
+      document.querySelector('.selected-count').style.display = 'block';
+    }
+
+    function updateSelectedDishes() {
+      const selectedDishesList = document.getElementById('selectedDishes');
+      selectedDishesList.innerHTML = '';
+      selectedDishes.forEach(dish => {
+        const li = document.createElement('li');
+        li.innerText = dish;
+        selectedDishesList.appendChild(li);
+      });
+    }
+
+    function copyToClipboard() {
+      const text = selectedDishes.join('\n');
+      const textarea = document.createElement('textarea');
+      document.body.appendChild(textarea);
+      textarea.value = text;
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('Đã sao chép danh sách món!');
+    }
+  </script>
+
+</body>
+</html>
